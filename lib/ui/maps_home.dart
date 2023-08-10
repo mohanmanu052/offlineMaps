@@ -34,11 +34,14 @@ class _MapsHomeState extends State<MapsHome> {
               ? const Center(child: CircularProgressIndicator())
               : FlutterMap(
                   options: MapOptions(
-                    center: LatLng(controler.lattitude ?? 14.2002691,
-                        controler.longitude ?? 75.8869918),
+                    //By Default Coordinates Setted To Delhi
+                    center: LatLng(controler.lattitude ?? 28.6139,
+                        controler.longitude ?? 77.2090),
                     zoom: 13,
+                    maxZoom: 13,
+                    minZoom: 3,
                   ),
-                  nonRotatedChildren: [
+                  nonRotatedChildren: const [
                       RichAttributionWidget(
                         attributions: [
                           TextSourceAttribution(
@@ -51,7 +54,7 @@ class _MapsHomeState extends State<MapsHome> {
                   children: [
                       TileLayer(
                         // maxZoom: 18,
-                        // minZoom: 0,
+                        minZoom: 0,
                         // minNativeZoom: 7,
                         //zoomOffset: 6.0,
                         urlTemplate:
@@ -67,7 +70,7 @@ class _MapsHomeState extends State<MapsHome> {
                                 controler.longitude ?? 75.8869918),
                             width: 250,
                             height: 250,
-                            builder: (context) => Icon(
+                            builder: (context) => const Icon(
                               Icons.location_on_sharp,
                               color: Colors.red,
                               size: 40,
