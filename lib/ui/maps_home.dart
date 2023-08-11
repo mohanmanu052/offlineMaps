@@ -17,9 +17,17 @@ class _MapsHomeState extends State<MapsHome> {
   @override
   void initState() {
     controller = Provider.of<LocationController>(context, listen: false);
-    controller?.getUserCurrentLocation();
+    // controller?.getUserCurrentLocation();
+    controller?.startTracking();
     // TODO: implement initState
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller?.stopTracking();
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
