@@ -53,6 +53,21 @@
 	<string>Your description for location access when app is in use</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Your description for location access always</string>
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>The app needs it</string>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>The app needs it</string>
+<key>UIBackgroundModes</key>
+<array>
+  <string>location</string>
+</array>
+<key>NSLocationAlwaysUsageDescription</key>
+<string>Background location is required for tracking.</string>
+<key>UIBackgroundModes</key>
+<array>
+  <string>fetch</string>
+  <string>location</string>
+</array>
 
 </dict>
 </plist>

@@ -17,8 +17,8 @@ class _MapsHomeState extends State<MapsHome> {
   @override
   void initState() {
     controller = Provider.of<LocationController>(context, listen: false);
-    // controller?.getUserCurrentLocation();
-    controller?.startTracking();
+    controller?.getUserCurrentLocation();
+    // controller?.startTracking();
     // TODO: implement initState
     super.initState();
   }
@@ -40,53 +40,74 @@ class _MapsHomeState extends State<MapsHome> {
             builder: (context, LocationController controler, child) {
           return controler.lattitude == null && controler.longitude == null
               ? const Center(child: CircularProgressIndicator())
-              : FlutterMap(
-                  options: MapOptions(
-                    //By Default Coordinates Setted To Delhi
-                    center: LatLng(controler.lattitude ?? 28.6139,
-                        controler.longitude ?? 77.2090),
-                    zoom: 13,
-                    maxZoom: 13,
-                    minZoom: 3,
-                  ),
-                  nonRotatedChildren: const [
-                      RichAttributionWidget(
-                        attributions: [
-                          TextSourceAttribution(
-                            'OpenStreetMap contributors',
-                            // onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
-                          ),
-                        ],
-                      ),
-                    ],
+              : Container(
+                  child: Stack(
                   children: [
-                      TileLayer(
-                        // maxZoom: 18,
-                        minZoom: 0,
-                        // minNativeZoom: 7,
-                        //zoomOffset: 6.0,
-                        urlTemplate:
-                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                        userAgentPackageName: 'com.example.app',
-                        tileProvider:
-                            FMTC.instance('mapStore').getTileProvider(),
-                      ),
-                      MarkerLayer(
-                        markers: [
-                          Marker(
-                            point: LatLng(controler.lattitude ?? 14.2002691,
-                                controler.longitude ?? 75.8869918),
-                            width: 250,
-                            height: 250,
-                            builder: (context) => const Icon(
-                              Icons.location_on_sharp,
-                              color: Colors.red,
-                              size: 40,
-                            ),
+                    FlutterMap(
+                        options: MapOptions(
+                          //By Default Coordinates Setted To Delhi
+                          center: LatLng(controler.lattitude ?? 28.6139,
+                              controler.longitude ?? 77.2090),
+                          zoom: 13,
+                          maxZoom: 13,
+                          minZoom: 3,
+                        ),
+                        nonRotatedChildren: const [
+                          RichAttributionWidget(
+                            attributions: [
+                              TextSourceAttribution(
+                                'OpenStreetMap contributors',
+                                // onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
+                              ),
+                            ],
                           ),
                         ],
-                      ),
-                    ]);
+                        children: [
+                          TileLayer(
+                            // maxZoom: 18,
+                            minZoom: 0,
+                            // minNativeZoom: 7,
+                            //zoomOffset: 6.0,
+                            urlTemplate:
+                                'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            userAgentPackageName: 'com.example.app',
+                            tileProvider:
+                                FMTC.instance('mapStore').getTileProvider(),
+                          ),
+                          MarkerLayer(
+                            markers: [
+                              Marker(
+                                point: LatLng(controler.lattitude ?? 14.2002691,
+                                    controler.longitude ?? 75.8869918),
+                                width: 250,
+                                height: 250,
+                                builder: (context) => const Icon(
+                                  Icons.location_on_sharp,
+                                  color: Colors.red,
+                                  size: 40,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ]),
+                    Positioned(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                            onPressed: () {
+                              controller?.startTracking();
+                            },
+                            child: Text('Start')),
+                        ElevatedButton(
+                            onPressed: () {
+                              controller?.stopTracking();
+                            },
+                            child: Text('Stop'))
+                      ],
+                    ))
+                  ],
+                ));
         }));
   }
 }

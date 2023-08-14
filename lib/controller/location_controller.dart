@@ -19,8 +19,7 @@ class LocationController extends ChangeNotifier
 
   @override
   Future startTracking() async {
-    getUserCurrentLocation();
-    // TODO: implement startTracking
+    await getUserCurrentLocation();
     _locationServices.startTracking();
   }
 
