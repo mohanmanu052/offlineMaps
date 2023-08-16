@@ -20,24 +20,10 @@ class LocationServices implements IUserCurrentLocation {
   //Location location = Location();
   Timer? timer;
 
-
-
-
-
-
-
-
   Future<Position> getUserCurrentLocation(BuildContext context) async {
     // TODO: implement getUserCurrentLocation
     bool serviceEnabled;
     LocationPermission permission;
-
-
-
-
-
-
-
     //Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
@@ -54,7 +40,7 @@ class LocationServices implements IUserCurrentLocation {
       // if(Platform.isIOS){
         if(permission!=LocationPermission.always){
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please allow always location tracking permission')));
-          openAppSettings();
+          Geolocator.openLocationSettings();
 
         // }
       }
@@ -89,17 +75,7 @@ class LocationServices implements IUserCurrentLocation {
       csvData.add([postion.latitude, postion.longitude]);
       writeToCsv();
     });
-    //setState(() {
-    // latitude = location.latitude.toString();
-    // longitude = location.longitude.toString();
-    // accuracy = location.accuracy.toString();
-    // altitude = location.altitude.toString();
-    // bearing = location.bearing.toString();
-    // speed = location.speed.toString();
-    // time = DateTime.fromMillisecondsSinceEpoch(
-    //         location.time!.toInt())
-    //     .toString();
-    //});
+
   }
 
   Future<void> writeToCsv() async {
