@@ -51,12 +51,12 @@ class LocationServices implements IUserCurrentLocation {
     if (permission == LocationPermission.denied) {
 
       permission = await Geolocator.requestPermission();
-      if(Platform.isIOS){
+      // if(Platform.isIOS){
         if(permission!=LocationPermission.always){
-          ScaffoldMessenger.maybeOf(context)?.showSnackBar(SnackBar(content: Text('Please allow always location tracking permission')));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please allow always location tracking permission')));
           openAppSettings();
 
-        }
+        // }
       }
 
 
