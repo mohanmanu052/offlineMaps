@@ -17,7 +17,7 @@ class _MapsHomeState extends State<MapsHome> {
   @override
   void initState() {
     controller = Provider.of<LocationController>(context, listen: false);
-    controller?.getUserCurrentLocation();
+    controller?.getUserCurrentLocation(context);
     // controller?.startTracking();
     // TODO: implement initState
     super.initState();
@@ -96,7 +96,7 @@ class _MapsHomeState extends State<MapsHome> {
                       children: [
                         ElevatedButton(
                             onPressed: () {
-                              controller?.startTracking();
+                              controller?.startTracking(context);
                             },
                             child: Text('Start')),
                         ElevatedButton(
