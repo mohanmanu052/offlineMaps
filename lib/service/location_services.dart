@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:csv/csv.dart';
+import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:geolocator/geolocator.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 abstract class IUserCurrentLocation {
-  Future<dynamic> startTracking();
+  Future<dynamic> startTracking(BuildContext context);
   Future<dynamic> stopTracking();
 }
 
@@ -18,11 +20,25 @@ class LocationServices implements IUserCurrentLocation {
   //Location location = Location();
   Timer? timer;
 
-  Future<Position> getUserCurrentLocation() async {
+
+
+
+
+
+
+
+  Future<Position> getUserCurrentLocation(BuildContext context) async {
     // TODO: implement getUserCurrentLocation
     bool serviceEnabled;
     LocationPermission permission;
-    // Test if location services are enabled.
+
+
+
+
+
+
+
+    //Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       // Location services are not enabled don't continue
@@ -33,7 +49,17 @@ class LocationServices implements IUserCurrentLocation {
 
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
+
       permission = await Geolocator.requestPermission();
+      if(Platform.isIOS){
+        if(permission!=LocationPermission.always){
+          ScaffoldMessenger.maybeOf(context)?.showSnackBar(SnackBar(content: Text('Please allow always location tracking permission')));
+          openAppSettings();
+
+        }
+      }
+
+
       if (permission == LocationPermission.denied) {
         return Future.error('Location permissions are denied');
       }
@@ -90,7 +116,7 @@ class LocationServices implements IUserCurrentLocation {
   }
 
   @override
-  Future startTracking() async {
+  Future startTracking(BuildContext context) async {
     // await getUserCurrentLocation();
     getUserLocationOnTimeInterVal();
     // TODO: implement startTracking
