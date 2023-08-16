@@ -8,9 +8,14 @@ class LocationController extends ChangeNotifier
 
   LocationServices _locationServices = LocationServices();
 
-  Future getUserCurrentLocation() async {
+  Future getUserCurrentLocation(BuildContext context) async {
+
     print('coming in controller get user currentLocation');
-    var positionData = await _locationServices.getUserCurrentLocation();
+
+    //await _locationServices. shouldShowRequestRationale();
+
+    //var permiison=await _locationServices.requestPermission();
+    var positionData = await _locationServices.getUserCurrentLocation(context);
     lattitude = positionData.latitude;
     longitude = positionData.longitude;
     print('the lattitude was--$lattitude      $longitude');
@@ -18,9 +23,9 @@ class LocationController extends ChangeNotifier
   }
 
   @override
-  Future startTracking() async {
-    await getUserCurrentLocation();
-    _locationServices.startTracking();
+  Future startTracking(BuildContext context) async {
+    await getUserCurrentLocation(context);
+    _locationServices.startTracking(context);
   }
 
   @override
