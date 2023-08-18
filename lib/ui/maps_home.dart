@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:offline_maps/controller/location_controller.dart';
+import 'package:offline_maps/notifications/controller/notification_controller.dart';
 import 'package:provider/provider.dart';
 
 class MapsHome extends StatefulWidget {
@@ -17,6 +18,7 @@ class _MapsHomeState extends State<MapsHome> {
   @override
   void initState() {
     controller = Provider.of<LocationController>(context, listen: false);
+
     controller?.getUserCurrentLocation(context);
     // controller?.startTracking();
     // TODO: implement initState
@@ -98,12 +100,20 @@ class _MapsHomeState extends State<MapsHome> {
                             onPressed: () {
                               controller?.startTracking(context);
                             },
-                            child: Text('Start')),
+                            child: const Text('Start')),
                         ElevatedButton(
                             onPressed: () {
                               controller?.stopTracking();
                             },
-                            child: Text('Stop'))
+                            child: const Text('Stop')),
+
+                        ElevatedButton(
+                            onPressed: () {
+                              NotificationController.createNewNotification();
+                            },
+                            child: const Text('create Notification'))
+
+
                       ],
                     ))
                   ],

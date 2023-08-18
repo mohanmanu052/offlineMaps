@@ -1,13 +1,46 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:offline_maps/controller/location_controller.dart';
-import 'package:offline_maps/ui/maps_home.dart';
+import 'package:offline_maps/notifications/controller/notification_controller.dart';
+import 'package:offline_maps/ui/home_screen.dart';
+import 'package:offline_maps/videochat/di/injector.dart';
+import 'package:offline_maps/videochat/domain/repositories/auth_repository.dart';
 import 'package:provider/provider.dart';
+
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    await Firebase.initializeApp();
+
+      print('the message recived from firebase fcm');
+      // NotificationController.startListeningNotificationEvents();
+
+     NotificationController.createNewNotification();
+
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  print('Handling a background message ${message.messageId}');
+}
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterMapTileCaching.initialise();
-  await FMTC.instance('mapStore').manage.createAsync();
+  await Firebase.initializeApp();
+ // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+try{
+   FMTC.instance('mapStore').manage.createAsync();
+
+}catch(error){
+print('the FMTC Initialization error was ${error.toString()}');
+}
+    // await NotificationController.initializeLocalNotifications();
+    //    NotificationController. startListeningNotificationEvents();
+
+  initInjector();
+  await i.get<AuthRepositoryInt>().signInAnonymously();
+ // runApp(const VideoStreamingApp());
   // ...
   runApp(const MyApp());
 }
@@ -21,7 +54,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => LocationController()),
-          ChangeNotifierProvider(create: (context) => LocationController()),
+        //  ChangeNotifierProvider(create: (context) => NotificationController()),
         ],
         child: MaterialApp(
           title: 'Flutter Demo',
@@ -44,7 +77,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const MapsHome(),
+          home: const HomeScreen(),
         ));
   }
 }

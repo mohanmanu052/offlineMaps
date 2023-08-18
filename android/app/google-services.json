@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "516421906870",
+    "project_id": "testofflinemapsnotifications",
+    "storage_bucket": "testofflinemapsnotifications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516421906870:android:673609f9c2bca6c59e9117",
+        "android_client_info": {
+          "package_name": "com.example.offline_maps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "516421906870-e1cc77rkq44jflm04g8fnvs1hoq7fksr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.offline_maps",
+            "certificate_hash": "6e77f0daf2c4a3427d3affc0028d3f95b57bcadc"
+          }
+        },
+        {
+          "client_id": "516421906870-edcume9vbanmmgtces09jubjsl21ff4i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmU3MbW4WjE_6su2gjFHmCeYGW9ibpg3A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "516421906870-edcume9vbanmmgtces09jubjsl21ff4i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

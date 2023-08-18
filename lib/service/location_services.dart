@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:geolocator/geolocator.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 abstract class IUserCurrentLocation {
   Future<dynamic> startTracking(BuildContext context);
@@ -13,7 +14,6 @@ abstract class IUserCurrentLocation {
 
 class LocationServices implements IUserCurrentLocation {
   late LocationSettings locationSettings;
-  StreamSubscription<Position>? _positionStreamSubscription;
 
   final List<List<dynamic>> csvData = [];
   //Location location = Location();
@@ -39,7 +39,8 @@ class LocationServices implements IUserCurrentLocation {
       // if(Platform.isIOS){
         if(permission!=LocationPermission.always){
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please allow always location tracking permission')));
-          Geolocator.openLocationSettings();
+        //  Geolocator.openLocationSettings();
+        openAppSettings();
 
         // }
       }
@@ -71,6 +72,7 @@ class LocationServices implements IUserCurrentLocation {
 
     timer = Timer.periodic(Duration(seconds: 1), (Timer timer) async {
       var postion = await Geolocator.getCurrentPosition();
+      print('location fetching----------');
       csvData.add([postion.latitude, postion.longitude]);
       writeToCsv();
     });
@@ -99,6 +101,7 @@ class LocationServices implements IUserCurrentLocation {
 
   @override
   Future stopTracking() async {
+    print('coming to cancel----');
     timer?.cancel();
     // TODO: implement stopTracking
   }

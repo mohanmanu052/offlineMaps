@@ -6,7 +6,7 @@ class LocationController extends ChangeNotifier
   double? lattitude;
   double? longitude;
 
-  LocationServices _locationServices = LocationServices();
+  final LocationServices _locationServices = LocationServices();
 
   Future getUserCurrentLocation(BuildContext context) async {
 
@@ -18,6 +18,8 @@ class LocationController extends ChangeNotifier
     var positionData = await _locationServices.getUserCurrentLocation(context);
     lattitude = positionData.latitude;
     longitude = positionData.longitude;
+        //NotificationController.requestNotificationPermission();
+
     print('the lattitude was--$lattitude      $longitude');
     notifyListeners();
   }
