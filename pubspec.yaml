@@ -42,17 +42,17 @@ dependencies:
   provider: ^6.0.5
   csv: ^5.0.2
   path_provider: ^2.1.0
-  awesome_notifications: ^0.7.4+1
   firebase_core: ^2.15.1
   firebase_messaging: ^14.6.6
   firebase_auth: ^4.1.2
   flutter_bloc: ^8.1.1
-  flutter_webrtc: ^0.9.16
+  flutter_webrtc: ^0.9.40
   get_it: ^7.2.0
   video_player: ^2.4.7
   wakelock: ^0.6.2
   cloud_firestore: ^4.0.5
   permission_handler: ^10.4.3
+  location: ^5.0.3
 
 
 dev_dependencies:

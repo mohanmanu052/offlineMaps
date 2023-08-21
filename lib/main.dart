@@ -3,7 +3,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:offline_maps/controller/location_controller.dart';
-import 'package:offline_maps/notifications/controller/notification_controller.dart';
 import 'package:offline_maps/ui/home_screen.dart';
 import 'package:offline_maps/videochat/di/injector.dart';
 import 'package:offline_maps/videochat/domain/repositories/auth_repository.dart';
@@ -16,7 +15,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
       print('the message recived from firebase fcm');
       // NotificationController.startListeningNotificationEvents();
 
-     NotificationController.createNewNotification();
 
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.

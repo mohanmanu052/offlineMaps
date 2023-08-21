@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:offline_maps/service/location_services.dart';
 
 class LocationController extends ChangeNotifier
     implements IUserCurrentLocation {
   double? lattitude;
   double? longitude;
+  double? stopLattitude;
+  double? stopLongitude;
 
   final LocationServices _locationServices = LocationServices();
+
+
+
+void showTotalDistanceTravelled(BuildContext context, double totalDistance)async{
+
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('The Total Distance Travelled in meters was ${totalDistance.toString()}')));
+
+}
+
+
 
   Future getUserCurrentLocation(BuildContext context) async {
 

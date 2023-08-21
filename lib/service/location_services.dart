@@ -25,6 +25,7 @@ class LocationServices implements IUserCurrentLocation {
     LocationPermission permission;
     //Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    print('coming to getUserCurrentLocation-------');
     if (!serviceEnabled) {
       // Location services are not enabled don't continue
       // accessing the position and request users of the
@@ -72,7 +73,6 @@ class LocationServices implements IUserCurrentLocation {
 
     timer = Timer.periodic(Duration(seconds: 1), (Timer timer) async {
       var postion = await Geolocator.getCurrentPosition();
-      print('location fetching----------');
       csvData.add([postion.latitude, postion.longitude]);
       writeToCsv();
     });
