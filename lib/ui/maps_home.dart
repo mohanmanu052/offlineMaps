@@ -59,17 +59,20 @@ class _MapsHomeState extends State<MapsHome> {
       _totalDistance += distance1;
     }
 
-    if (speedKmps > 30) {
+    if (speedKmps > 3) {
       _lineColor = Colors.red;
-    } else if (speedKmps > 10 && speedKmps < 30) {
+    } else if (speedKmps > 1 && speedKmps < 3) {
       _lineColor = Colors.orange;
     } else {
       _lineColor = Colors.blue;
     }
+if(mounted){
+
 
     setState(() {
       _points.add(newPoint);
     });
+}
     }else{
 
     }
@@ -92,8 +95,6 @@ class _MapsHomeState extends State<MapsHome> {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {});
     });
-    // controller?.start}Tracking();
-    // TODO: implement initState
     super.initState();
   }
 
