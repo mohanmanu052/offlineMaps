@@ -35,7 +35,7 @@ class _MapsHomeState extends State<MapsHome> {
 
     ];
 
-  Color _lineColor = Colors.blue;
+  List<Color> _lineColors = [];
 
   final Location _location = Location();
   double _totalDistance = 0.0;
@@ -60,11 +60,11 @@ class _MapsHomeState extends State<MapsHome> {
     }
 
     if (speedKmps > 3) {
-      _lineColor = Colors.red;
+      _lineColors.add(Colors.red);
     } else if (speedKmps > 1 && speedKmps < 3) {
-      _lineColor = Colors.orange;
+      _lineColors.add(Colors.orange);
     } else {
-      _lineColor = Colors.blue;
+      _lineColors.add(Colors.blue);
     }
 if(mounted){
 
@@ -171,16 +171,14 @@ void stopTracking(){
                         ],
                       ),
 PolylineLayer(
-  polylines: [
-    Polyline(
-      strokeWidth: 3,
-      borderColor: _lineColor,
-                points: _points,
-                color: _lineColor,
-                borderStrokeWidth: 0.0,
-     // isFilled: false,
-    ),
-  ],
+                  polylines: _points.asMap().entries.map((entry) {
+                    return Polyline(
+                      points: _points.sublist(0, entry.key + 1),
+                      color: _lineColors[entry.key],
+                      strokeWidth: 3.0,
+                    );
+                  }).toList(),
+  
 ),
       
       
